@@ -21,15 +21,3 @@ public interface ReceiptMapper {
 }
 
 
-
-/*
-@Mapper 1
-public interface CarMapper {
-
-    CarMapper INSTANCE = Mappers.getMapper( CarMapper.class ); 3
-
-    @Mapping(source = "numberOfSeats", target = "seatCount")
-    CarDto carToCarDto(Car car); 2
-}
- */
-

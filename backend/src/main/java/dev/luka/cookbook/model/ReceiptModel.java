@@ -9,5 +9,4 @@ public class ReceiptModel {
 
     private Long id;
     private String name;
-    private List<ReceiptItemModel> receiptItems;
 }

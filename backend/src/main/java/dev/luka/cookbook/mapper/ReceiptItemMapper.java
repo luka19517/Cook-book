@@ -9,9 +9,11 @@ import org.mapstruct.factory.Mappers;
 @Mapper
 public interface ReceiptItemMapper {
     ReceiptItemMapper INSTANCE = Mappers.getMapper(ReceiptItemMapper.class);
+
     @Mapping(source = "id", target = "id")
     @Mapping(source = "name", target = "name")
     @Mapping(source = "quantity", target = "quantity")
+    @Mapping(source = "receipt", target="receiptModel")
     ReceiptItemModel receiptItemToModel(ReceiptItem receiptItem);
 
     @Mapping(source = "id", target = "id")

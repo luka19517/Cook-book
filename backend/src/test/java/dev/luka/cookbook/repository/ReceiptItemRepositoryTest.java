@@ -30,7 +30,6 @@ public class ReceiptItemRepositoryTest {
     @Test
     public void testCrud() {
         Receipt receipt = new Receipt();
-
         receipt.setName("Baklava");
         receiptRepo.save(receipt);
         receiptRepo.flush();
