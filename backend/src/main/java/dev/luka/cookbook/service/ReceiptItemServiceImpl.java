@@ -3,7 +3,10 @@ package dev.luka.cookbook.service;
 import dev.luka.cookbook.domain.entity.Receipt;
 import dev.luka.cookbook.domain.entity.ReceiptItem;
 import dev.luka.cookbook.domain.repository.ReceiptItemRepository;
+import dev.luka.cookbook.mapper.ReceiptItemMapper;
+import dev.luka.cookbook.mapper.ReceiptMapper;
 import dev.luka.cookbook.model.ReceiptItemModel;
+import dev.luka.cookbook.model.ReceiptModel;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,7 +28,7 @@ public class ReceiptItemServiceImpl implements ReceiptItemService {
 
         List<ReceiptItem> receiptItems = (List<ReceiptItem>) receiptItemRepository.findAll();
         for (ReceiptItem item : receiptItems){
-            receiptItemModels.add(toModel(item));
+            receiptItemModels.add(ReceiptItemMapper.INSTANCE.receiptItemToModel( item ));
         }
 
         return receiptItemModels;
@@ -37,7 +40,7 @@ public class ReceiptItemServiceImpl implements ReceiptItemService {
 
         List<ReceiptItem> receiptItems = receiptItemRepository.findByReceipt(receipt);
         for(ReceiptItem item: receiptItems){
-            receiptItemModels.add(toModel(item));
+            receiptItemModels.add(ReceiptItemMapper.INSTANCE.receiptItemToModel( item ));
         }
 
         return receiptItemModels;
@@ -45,12 +48,12 @@ public class ReceiptItemServiceImpl implements ReceiptItemService {
     }
 
     @Override
-    public ReceiptItemModel toModel(ReceiptItem item) {
-        ReceiptItemModel receiptItemModel = new ReceiptItemModel();
-        receiptItemModel.setId(item.getId());
-        receiptItemModel.setName(item.getName());
-        receiptItemModel.setQuantity(item.getQuantity());
+    public ReceiptItemModel insert(ReceiptItemModel receiptItemModel, ReceiptModel receiptModel) {
+        ReceiptItem receiptItem = ReceiptItemMapper.INSTANCE.receiptItemModelToEntity(receiptItemModel);
+        receiptItem.setReceipt(ReceiptMapper.INSTANCE.receiptModelToEntity(receiptModel));
+        receiptItemRepository.save(receiptItem);
 
-        return receiptItemModel;
+        return  ReceiptItemMapper.INSTANCE.receiptItemToModel(receiptItem);
     }
+
 }

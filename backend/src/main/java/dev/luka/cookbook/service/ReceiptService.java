@@ -13,6 +13,6 @@ public interface ReceiptService {
 
     List<ReceiptModel> getAll();
 
-    ReceiptModel toModel(Receipt receipt);
+    ReceiptModel insert(ReceiptModel receiptModel);
 
 }

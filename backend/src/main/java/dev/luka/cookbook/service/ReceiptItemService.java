@@ -4,6 +4,7 @@ import dev.luka.cookbook.domain.entity.Receipt;
 import dev.luka.cookbook.domain.entity.ReceiptItem;
 import dev.luka.cookbook.domain.repository.ReceiptItemRepository;
 import dev.luka.cookbook.model.ReceiptItemModel;
+import dev.luka.cookbook.model.ReceiptModel;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
@@ -15,5 +16,5 @@ public interface ReceiptItemService {
 
     List<ReceiptItemModel> getAllItemsForReceipt(Receipt receipt);
 
-    ReceiptItemModel toModel(ReceiptItem item);
+    ReceiptItemModel insert(ReceiptItemModel receiptItemModel, ReceiptModel receiptModel);
 }
