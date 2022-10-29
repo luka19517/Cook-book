@@ -1,7 +1,5 @@
 package dev.luka.cookbook.config;
 
-import dev.luka.cookbook.domain.entity.Receipt;
-import dev.luka.cookbook.domain.repository.ReceiptRepository;
 import dev.luka.cookbook.service.ReceiptItemService;
 import dev.luka.cookbook.service.ReceiptItemServiceImpl;
 import dev.luka.cookbook.service.ReceiptService;
@@ -9,13 +7,15 @@ import dev.luka.cookbook.service.ReceiptServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.data.repository.Repository;
-
-import java.util.Optional;
+import org.springframework.context.annotation.ImportResource;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
-@ComponentScan(basePackages = {"dev.luka"})
+@EnableJpaRepositories(basePackages = {"dev.luka.cookbook.domain.repository"})
+@ImportResource("classpath:META-INF/spring/applicationContext-domain-test.xml")
+@ComponentScan(basePackages = {"dev.luka.cookbook"})
+@EnableTransactionManagement
 public class TestConfig {
 
     @Bean
