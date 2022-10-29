@@ -12,26 +12,9 @@ import java.util.List;
 @SpringBootTest
 class CookBookApplicationTests {
 
-	@Autowired
-	ReceiptRepository receiptRepo;
-
-	@Autowired
-	ReceiptItemRepository receiptItemRepo;
-
-	@Test
-	void contextLoads() {
-	}
-
-	@Test
-	void testRepos1(){
-		System.out.println(((List<Receipt>)receiptRepo.findAll()).size());
-	}
-
-	@Test
-	void testRepos2(){
-		Receipt receipt = receiptRepo.findById((long)1).get();
-		System.out.println(receiptItemRepo.findByReceipt(receipt).size());
-	}
+    @Test
+    void contextLoads() {
+    }
 
 
 }
