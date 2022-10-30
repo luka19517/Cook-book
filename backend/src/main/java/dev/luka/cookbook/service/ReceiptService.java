@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface ReceiptService {
 
+    ReceiptModel getForId(Long id);
+
     List<ReceiptModel> getAll();
 
     ReceiptModel insert(ReceiptModel receiptModel);

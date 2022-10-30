@@ -32,6 +32,7 @@ public class ReceiptServiceTest {
         receiptService.update(receiptModel);
 
         Assertions.assertEquals("Makedonska baklava", receiptService.getAll().get(0).getName());
+        Assertions.assertEquals(1, receiptService.getAll().get(0).getId());
         Assertions.assertEquals(1, receiptService.getAll().size());
     }
 

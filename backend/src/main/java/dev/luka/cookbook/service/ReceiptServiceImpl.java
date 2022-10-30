@@ -21,6 +21,15 @@ public class ReceiptServiceImpl implements ReceiptService {
 
 
     @Override
+    public ReceiptModel getForId(Long id) {
+        Optional<Receipt> targetReceiptOptional = receiptRepository.findById(id);
+        if (targetReceiptOptional.isPresent())
+            return ReceiptMapper.INSTANCE.receiptToModel(targetReceiptOptional.get());
+        else
+            return null;
+    }
+
+    @Override
     public List<ReceiptModel> getAll() {
         List<ReceiptModel> receiptModels = new ArrayList<>();
 

@@ -7,6 +7,9 @@ import java.util.List;
 
 public interface ReceiptItemService {
 
+
+    ReceiptItemModel getForId(Long id);
+
     List<ReceiptItemModel> getAll();
 
     List<ReceiptItemModel> getAllItemsForReceipt(ReceiptModel receiptModel);
