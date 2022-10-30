@@ -1,6 +1,5 @@
 package dev.luka.cookbook.controller;
 
-import dev.luka.cookbook.domain.entity.ReceiptItem;
 import dev.luka.cookbook.model.ReceiptItemModel;
 import dev.luka.cookbook.model.ReceiptModel;
 import org.springframework.web.bind.annotation.*;
@@ -16,40 +15,42 @@ public class CookBookController {
     }
 
     @GetMapping("/getAllReceipts")
-    public String getAllReceipts(){
+    public String getAllReceipts() {
         return "IMPLEMENT ME";
     }
 
     @GetMapping("/getAllReceiptItems")
-    public String getAllReceiptItems(@RequestParam Long receiptId){
+    public String getAllReceiptItems(@RequestParam Long receiptId) {
         return "IMPLEMENT ME";
     }
 
     @GetMapping("/addNewReceipt")
-    public String addNewReceipt(@RequestParam ReceiptItemModel receiptItemModel){
+    public String addNewReceipt(@RequestParam ReceiptItemModel receiptItemModel) {
         return "IMPLEMENT ME";
     }
+
     @GetMapping("/addReceiptItem")
-    public String addReceiptItem(@RequestParam ReceiptItemModel receiptItemModel, @RequestParam Long receiptId){
+    public String addReceiptItem(@RequestParam ReceiptItemModel receiptItemModel, @RequestParam Long receiptId) {
         return "IMPLEMENT ME";
     }
 
     @GetMapping("/deleteReceipt")
-    public String deleteReceipt(@RequestParam Long receiptId){
+    public String deleteReceipt(@RequestParam Long receiptId) {
         return "IMPLEMENT ME";
     }
 
     @GetMapping("/deleteReceiptItem")
-    public String deleteReceiptItem(@RequestParam Long receiptItemId){
+    public String deleteReceiptItem(@RequestParam Long receiptItemId) {
         return "IMPLEMENT ME";
     }
 
     @GetMapping("/editReceipt")
-    public String editReceipt(@RequestParam ReceiptModel newReceipt){
+    public String editReceipt(@RequestParam ReceiptModel newReceipt) {
         return "IMPLEMENT ME";
     }
+
     @GetMapping("/editReceiptItem")
-    public String editReceiptItem(@RequestParam ReceiptItemModel newReceiptItem){
+    public String editReceiptItem(@RequestParam ReceiptItemModel newReceiptItem) {
         return "IMPLEMENT ME";
     }
 

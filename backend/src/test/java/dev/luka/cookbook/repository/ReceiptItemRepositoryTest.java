@@ -40,6 +40,8 @@ public class ReceiptItemRepositoryTest {
         receiptItem.setReceipt(receiptRepo.findById(receipt.getId()).get());
         receiptItemRepo.save(receiptItem);
 
+        receiptItem.setName("Limun");
+
         Assertions.assertEquals(1, receiptItemRepo.findAll().size());
 
         Assertions.assertEquals(1,receiptItemRepo.findByReceipt(receiptRepo.findById(receipt.getId()).get()).size());

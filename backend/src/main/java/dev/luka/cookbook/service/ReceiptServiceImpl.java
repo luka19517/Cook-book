@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Data
 @Service
@@ -36,7 +37,28 @@ public class ReceiptServiceImpl implements ReceiptService {
         Receipt receipt = ReceiptMapper.INSTANCE.receiptModelToEntity(receiptModel);
         receiptRepository.save(receipt);
 
-        return receiptModel;
+        return ReceiptMapper.INSTANCE.receiptToModel(receipt);
+    }
+
+    @Override
+    public ReceiptModel update(ReceiptModel receiptModel) {
+        Receipt receipt = ReceiptMapper.INSTANCE.receiptModelToEntity(receiptModel);
+        receiptRepository.save(receipt);
+
+        return ReceiptMapper.INSTANCE.receiptToModel(receipt);
+    }
+
+    @Override
+    public Boolean delete(ReceiptModel receiptModel) {
+
+        Optional<Receipt> optionalReceipt = receiptRepository.findById(receiptModel.getId());
+        if (optionalReceipt.isPresent()) {
+            Receipt receiptToDelete = optionalReceipt.get();
+            receiptRepository.delete(receiptToDelete);
+            return true;
+        }
+
+        return false;
     }
 
 }

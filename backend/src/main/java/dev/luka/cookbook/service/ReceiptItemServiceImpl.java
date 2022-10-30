@@ -5,6 +5,7 @@ import dev.luka.cookbook.domain.entity.ReceiptItem;
 import dev.luka.cookbook.domain.repository.ReceiptItemRepository;
 import dev.luka.cookbook.domain.repository.ReceiptRepository;
 import dev.luka.cookbook.mapper.ReceiptItemMapper;
+import dev.luka.cookbook.mapper.ReceiptMapper;
 import dev.luka.cookbook.model.ReceiptItemModel;
 import dev.luka.cookbook.model.ReceiptModel;
 import lombok.Data;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Data
 @Service
@@ -54,11 +56,34 @@ public class ReceiptItemServiceImpl implements ReceiptItemService {
     public ReceiptItemModel insert(ReceiptItemModel receiptItemModel) {
         ReceiptItem receiptItem = ReceiptItemMapper.INSTANCE.receiptItemModelToEntity(receiptItemModel);
 
-        Receipt receipt = receiptRepository.findByName(receiptItemModel.getReceiptModel().getName());
+        Receipt receipt = receiptRepository.findById(receiptItemModel.getReceiptModel().getId()).get();
         receiptItem.setReceipt(receipt);
         receiptItemRepository.save(receiptItem);
 
         return ReceiptItemMapper.INSTANCE.receiptItemToModel(receiptItem);
+    }
+
+    @Override
+    public ReceiptItemModel update(ReceiptItemModel receiptItemModel) {
+        ReceiptItem receiptItem = ReceiptItemMapper.INSTANCE.receiptItemModelToEntity(receiptItemModel);
+
+        Receipt receipt = receiptRepository.findById(receiptItemModel.getReceiptModel().getId()).get();
+        receiptItem.setReceipt(receipt);
+
+        receiptItemRepository.save(receiptItem);
+
+        return ReceiptItemMapper.INSTANCE.receiptItemToModel(receiptItem);
+    }
+
+    @Override
+    public Boolean delete(ReceiptItemModel receiptItemModel) {
+        Optional<ReceiptItem> optionalReceiptItem = receiptItemRepository.findById(receiptItemModel.getId());
+        if (optionalReceiptItem.isPresent()) {
+            ReceiptItem receiptItemToDelete = optionalReceiptItem.get();
+            receiptItemRepository.delete(receiptItemToDelete);
+            return true;
+        }
+        return false;
     }
 
 

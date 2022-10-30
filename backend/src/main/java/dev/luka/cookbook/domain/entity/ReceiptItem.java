@@ -1,8 +1,6 @@
 package dev.luka.cookbook.domain.entity;
 
 
-import dev.luka.cookbook.model.ReceiptItemModel;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 

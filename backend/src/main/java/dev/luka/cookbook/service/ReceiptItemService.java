@@ -1,6 +1,5 @@
 package dev.luka.cookbook.service;
 
-import dev.luka.cookbook.domain.entity.Receipt;
 import dev.luka.cookbook.model.ReceiptItemModel;
 import dev.luka.cookbook.model.ReceiptModel;
 
@@ -13,5 +12,9 @@ public interface ReceiptItemService {
     List<ReceiptItemModel> getAllItemsForReceipt(ReceiptModel receiptModel);
 
     ReceiptItemModel insert(ReceiptItemModel receiptItemModel);
+
+    ReceiptItemModel update(ReceiptItemModel receiptItemModel);
+
+    Boolean delete(ReceiptItemModel receiptItemModel);
 
 }

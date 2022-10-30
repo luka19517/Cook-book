@@ -26,20 +26,46 @@ public class ReceiptItemServiceTest {
     private ReceiptService receiptService;
 
     @Test
-    public void testService() {
+    public void testInsertUpdate() {
         ReceiptModel receiptModel = new ReceiptModel();
         receiptModel.setName("Baklava");
-        receiptService.insert(receiptModel);
-
+        receiptModel = receiptService.insert(receiptModel);
 
         ReceiptItemModel receiptItemModel = new ReceiptItemModel();
         receiptItemModel.setName("Secer");
         receiptItemModel.setQuantity(2.9);
         receiptItemModel.setReceiptModel(receiptModel);
-        receiptItemService.insert(receiptItemModel);
-
+        receiptItemModel = receiptItemService.insert(receiptItemModel);
+        Assertions.assertEquals(2.9,receiptItemService.getAll().get(0).getQuantity());
+        receiptItemModel.setQuantity(3.0);
+        receiptItemService.update(receiptItemModel);
+        Assertions.assertEquals(3.0,receiptItemService.getAll().get(0).getQuantity());
         Assertions.assertEquals(1, receiptItemService.getAll().size());
         Assertions.assertEquals(1, receiptItemService.getAllItemsForReceipt(receiptModel).size());
+
+    }
+
+    @Test
+    public void testDelete(){
+        ReceiptModel receiptModel = new ReceiptModel();
+        receiptModel.setName("Baklava");
+        receiptModel = receiptService.insert(receiptModel);
+
+        ReceiptItemModel receiptItemModel = new ReceiptItemModel();
+        receiptItemModel.setName("Voda");
+        receiptItemModel.setReceiptModel(receiptModel);
+        receiptItemModel = receiptItemService.insert(receiptItemModel);
+
+        ReceiptItemModel receiptItemModel1 = new ReceiptItemModel();
+        receiptItemModel1.setId((long)21);
+        receiptItemModel1.setName("Limun");
+        Assertions.assertFalse(receiptItemService.delete(receiptItemModel1));
+        Assertions.assertEquals(1, receiptItemService.getAll().size());
+        Assertions.assertTrue(receiptItemService.delete(receiptItemModel));
+
+        Assertions.assertEquals(0, receiptItemService.getAll().size());
+
+
 
     }
 
