@@ -19,6 +19,7 @@ public interface ReceiptItemMapper {
     @Mapping(source = "id", target = "id")
     @Mapping(source = "name", target = "name")
     @Mapping(source = "quantity", target = "quantity")
+    @Mapping(source = "receiptModel", target="receipt")
     ReceiptItem receiptItemModelToEntity(ReceiptItemModel receiptItemModel);
 }
 
