@@ -1,5 +1,6 @@
 package dev.luka.cookbook.service;
 
+import dev.luka.cookbook.domain.entity.Receipt;
 import dev.luka.cookbook.domain.entity.ReceiptItem;
 import dev.luka.cookbook.domain.repository.ReceiptItemRepository;
 import dev.luka.cookbook.domain.repository.ReceiptRepository;
@@ -53,6 +54,8 @@ public class ReceiptItemServiceImpl implements ReceiptItemService {
     public ReceiptItemModel insert(ReceiptItemModel receiptItemModel) {
         ReceiptItem receiptItem = ReceiptItemMapper.INSTANCE.receiptItemModelToEntity(receiptItemModel);
 
+        Receipt receipt = receiptRepository.findByName(receiptItemModel.getReceiptModel().getName());
+        receiptItem.setReceipt(receipt);
         receiptItemRepository.save(receiptItem);
 
         return ReceiptItemMapper.INSTANCE.receiptItemToModel(receiptItem);

@@ -1,9 +1,6 @@
 package dev.luka.cookbook.service;
 
 import dev.luka.cookbook.config.TestConfig;
-import dev.luka.cookbook.domain.entity.Receipt;
-import dev.luka.cookbook.domain.repository.ReceiptItemRepository;
-import dev.luka.cookbook.domain.repository.ReceiptRepository;
 import dev.luka.cookbook.model.ReceiptItemModel;
 import dev.luka.cookbook.model.ReceiptModel;
 import org.junit.jupiter.api.Assertions;
@@ -23,17 +20,13 @@ import javax.transaction.Transactional;
 public class ReceiptItemServiceTest {
 
     @Autowired
-    ReceiptItemRepository receiptItemRepo;
-    @Autowired
-    ReceiptRepository repo;
-    @Autowired
     private ReceiptItemService receiptItemService;
 
     @Autowired
     private ReceiptService receiptService;
 
     @Test
-    public void testService(){
+    public void testService() {
         ReceiptModel receiptModel = new ReceiptModel();
         receiptModel.setName("Baklava");
         receiptService.insert(receiptModel);
@@ -45,14 +38,9 @@ public class ReceiptItemServiceTest {
         receiptItemModel.setReceiptModel(receiptModel);
         receiptItemService.insert(receiptItemModel);
 
-        clearPersistenceContext();
         Assertions.assertEquals(1, receiptItemService.getAll().size());
         Assertions.assertEquals(1, receiptItemService.getAllItemsForReceipt(receiptModel).size());
 
     }
 
-    private void clearPersistenceContext() {
-        receiptItemRepo.flush();
-        repo.flush();
-    }
 }

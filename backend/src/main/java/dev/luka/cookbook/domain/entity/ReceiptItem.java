@@ -24,7 +24,7 @@ public class ReceiptItem {
     @Column(name="quantity")
     private Double quantity;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="receipt", referencedColumnName = "id")
     private Receipt receipt;
 

@@ -33,7 +33,8 @@ public class ReceiptServiceImpl implements ReceiptService {
 
     @Override
     public ReceiptModel insert(ReceiptModel receiptModel) {
-        receiptRepository.save(ReceiptMapper.INSTANCE.receiptModelToEntity(receiptModel));
+        Receipt receipt = ReceiptMapper.INSTANCE.receiptModelToEntity(receiptModel);
+        receiptRepository.save(receipt);
 
         return receiptModel;
     }
