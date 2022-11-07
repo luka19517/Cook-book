@@ -1,11 +1,11 @@
 package dev.luka.cookbook.service;
 
+
 import dev.luka.cookbook.domain.entity.Receipt;
 import dev.luka.cookbook.domain.entity.ReceiptItem;
 import dev.luka.cookbook.domain.repository.ReceiptItemRepository;
 import dev.luka.cookbook.domain.repository.ReceiptRepository;
 import dev.luka.cookbook.mapper.ReceiptItemMapper;
-import dev.luka.cookbook.mapper.ReceiptMapper;
 import dev.luka.cookbook.model.ReceiptItemModel;
 import dev.luka.cookbook.model.ReceiptModel;
 import lombok.Data;
@@ -28,13 +28,14 @@ public class ReceiptItemServiceImpl implements ReceiptItemService {
 
 
     @Override
-    public ReceiptItemModel getForId(Long id){
+    public ReceiptItemModel getForId(Long id) {
         Optional<ReceiptItem> targetReceiptItemOptional = receiptItemRepository.findById(id);
-        if(targetReceiptItemOptional.isPresent())
+        if (targetReceiptItemOptional.isPresent())
             return ReceiptItemMapper.INSTANCE.receiptItemToModel(targetReceiptItemOptional.get());
         else
             return null;
     }
+
     @Override
     public List<ReceiptItemModel> getAll() {
         List<ReceiptItemModel> receiptItemModels = new ArrayList<>();

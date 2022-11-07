@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
@@ -16,7 +17,7 @@ import javax.transaction.Transactional;
 @Configurable
 @ContextConfiguration(classes = {TestConfig.class})
 @Transactional
-@ExtendWith(SpringExtension.class)
+@SpringBootTest
 public class ReceiptServiceTest {
 
     @Autowired
@@ -28,11 +29,12 @@ public class ReceiptServiceTest {
 
         receiptModel.setName("Baklava");
         receiptModel = receiptService.insert(receiptModel);
+        long startingId = receiptModel.getId();
         receiptModel.setName("Makedonska baklava");
-        receiptService.update(receiptModel);
+        receiptModel = receiptService.update(receiptModel);
 
         Assertions.assertEquals("Makedonska baklava", receiptService.getAll().get(0).getName());
-        Assertions.assertEquals(1, receiptService.getAll().get(0).getId());
+        Assertions.assertEquals(startingId,receiptModel.getId());
         Assertions.assertEquals(1, receiptService.getAll().size());
     }
 

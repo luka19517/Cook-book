@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
@@ -16,7 +17,7 @@ import javax.transaction.Transactional;
 @Configurable
 @ContextConfiguration(classes = {TestConfig.class})
 @Transactional
-@ExtendWith(SpringExtension.class)
+@SpringBootTest
 public class ReceiptItemServiceTest {
 
     @Autowired
@@ -54,11 +55,13 @@ public class ReceiptItemServiceTest {
         ReceiptItemModel receiptItemModel = new ReceiptItemModel();
         receiptItemModel.setName("Voda");
         receiptItemModel.setReceiptModel(receiptModel);
+        receiptItemModel.setQuantity(21.2);
         receiptItemModel = receiptItemService.insert(receiptItemModel);
 
         ReceiptItemModel receiptItemModel1 = new ReceiptItemModel();
         receiptItemModel1.setId((long)21);
         receiptItemModel1.setName("Limun");
+        receiptItemModel1.setQuantity(2.0);
         Assertions.assertFalse(receiptItemService.delete(receiptItemModel1));
         Assertions.assertEquals(1, receiptItemService.getAll().size());
         Assertions.assertTrue(receiptItemService.delete(receiptItemModel));
