@@ -32,7 +32,7 @@ public class ReceiptItemController {
     }
 
     @GetMapping("/getAllItemsForReceipt")
-    public ResponseEntity<String> getAllItemsForReceipt(@RequestBody(required = true) String data) {
+    public ResponseEntity<String> getAllItemsForReceipt(@RequestBody() String data) {
         ObjectMapper mapper = new ObjectMapper();
         List<ReceiptItemModel> receiptItems;
         try {
@@ -49,7 +49,7 @@ public class ReceiptItemController {
     }
 
     @PostMapping("/insert")
-    public ResponseEntity<String> insert(@RequestBody(required = true) String data) {
+    public ResponseEntity<String> insert(@RequestBody() String data) {
         ObjectMapper mapper = new ObjectMapper();
         ReceiptItemModel insertedReceiptItem;
         try {
@@ -66,7 +66,7 @@ public class ReceiptItemController {
     }
 
     @PostMapping("/update")
-    public ResponseEntity<String> update(@RequestBody(required = true) String data) {
+    public ResponseEntity<String> update(@RequestBody() String data) {
         ObjectMapper mapper = new ObjectMapper();
         ReceiptItemModel updatedReceiptItem;
         try {
@@ -83,12 +83,12 @@ public class ReceiptItemController {
     }
 
     @PostMapping("/delete")
-    public ResponseEntity<String> delete(@RequestBody(required = true) String data) {
+    public ResponseEntity<String> delete(@RequestBody() String data) {
         ObjectMapper mapper = new ObjectMapper();
         Boolean isDeleted;
         try {
-            isDeleted = service.delete(mapper.readValue(data, ReceiptItemModel.class));
-            return new ResponseEntity<>(isDeleted.toString(), HttpStatus.OK);
+            service.delete(mapper.readValue(data, ReceiptItemModel.class));
+            return new ResponseEntity<>(HttpStatus.OK);
         } catch (JsonProcessingException e) {
             throw new IllegalStateException("Error while parsing request body");
         }

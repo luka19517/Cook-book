@@ -7,7 +7,7 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Entity
-@Table(name="receiptitem")
+@Table(name = "receiptitem")
 @Getter
 @Setter
 public class ReceiptItem {
@@ -19,11 +19,11 @@ public class ReceiptItem {
     @Column(name = "name")
     private String name;
 
-    @Column(name="quantity")
+    @Column(name = "quantity")
     private Double quantity;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="receipt", referencedColumnName = "id")
+    @ManyToOne
+    @JoinColumn(name = "receipt", referencedColumnName = "id")
     private Receipt receipt;
 
 }

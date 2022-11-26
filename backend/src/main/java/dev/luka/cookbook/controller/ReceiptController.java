@@ -43,7 +43,7 @@ public class ReceiptController {
     }
 
     @PostMapping("/insert")
-    public ResponseEntity<String> insert(@RequestBody(required = true) String data) {
+    public ResponseEntity<String> insert(@RequestBody() String data) {
         ObjectMapper mapper = new ObjectMapper();
         ReceiptModel insertedReceipt;
         try {
@@ -60,7 +60,7 @@ public class ReceiptController {
     }
 
     @PostMapping("/update")
-    public ResponseEntity<String> update(@RequestBody(required = true) String data) {
+    public ResponseEntity<String> update(@RequestBody() String data) {
         ObjectMapper mapper = new ObjectMapper();
         ReceiptModel updatedReceipt;
         try {
@@ -77,12 +77,12 @@ public class ReceiptController {
     }
 
     @PostMapping("/delete")
-    public ResponseEntity<String> delete(@RequestBody(required = true) String data) {
+    public ResponseEntity<String> delete(@RequestBody() String data) {
         ObjectMapper mapper = new ObjectMapper();
         Boolean isDeleted;
         try {
-            isDeleted = service.delete(mapper.readValue(data, ReceiptModel.class));
-            return new ResponseEntity<>(isDeleted.toString(), HttpStatus.OK);
+            service.delete(mapper.readValue(data, ReceiptModel.class));
+            return new ResponseEntity<>(HttpStatus.OK);
         } catch (JsonProcessingException e) {
             throw new IllegalStateException("Error while parsing request body");
         }

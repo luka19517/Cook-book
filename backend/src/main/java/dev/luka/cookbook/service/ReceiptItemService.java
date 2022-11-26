@@ -18,6 +18,6 @@ public interface ReceiptItemService {
 
     ReceiptItemModel update(ReceiptItemModel receiptItemModel);
 
-    Boolean delete(ReceiptItemModel receiptItemModel);
+    void delete(ReceiptItemModel receiptItemModel);
 
 }

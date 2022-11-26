@@ -14,6 +14,6 @@ public interface ReceiptService {
 
     ReceiptModel update(ReceiptModel receiptModel);
 
-    Boolean delete(ReceiptModel receiptModel);
+    void delete(ReceiptModel receiptModel);
 
 }
