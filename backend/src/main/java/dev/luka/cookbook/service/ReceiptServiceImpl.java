@@ -2,8 +2,8 @@ package dev.luka.cookbook.service;
 
 import dev.luka.cookbook.domain.entity.Receipt;
 import dev.luka.cookbook.domain.entity.ReceiptItem;
-import dev.luka.cookbook.domain.repository.ReceiptItemRepository;
 import dev.luka.cookbook.domain.repository.ReceiptRepository;
+import dev.luka.cookbook.mapper.ReceiptItemMapper;
 import dev.luka.cookbook.mapper.ReceiptMapper;
 import dev.luka.cookbook.model.ReceiptModel;
 import lombok.Data;
@@ -19,10 +19,6 @@ public class ReceiptServiceImpl implements ReceiptService {
     @Autowired
     private ReceiptRepository receiptRepository;
 
-
-    @Autowired
-    private ReceiptItemRepository receiptItemRepository;
-
     @Override
     public ReceiptModel getForId(Long id) {
         return ReceiptMapper.INSTANCE.entityToModel(receiptRepository.getReferenceById(id));
@@ -34,21 +30,34 @@ public class ReceiptServiceImpl implements ReceiptService {
     }
 
     @Override
-    public ReceiptModel insert(ReceiptModel receiptModel) {
-        Receipt receipt = ReceiptMapper.INSTANCE.modelToEntity(receiptModel);
-        receiptRepository.save(receipt);
-        return ReceiptMapper.INSTANCE.entityToModel(receipt);
-    }
+    public ReceiptModel save(ReceiptModel receiptModel) {
+        Receipt receipt;
+        List<ReceiptItem> receiptItems = ReceiptItemMapper.INSTANCE.modelToEntity(receiptModel.getReceiptItems());
 
-    @Override
-    public ReceiptModel update(ReceiptModel receiptModel) {
-        Receipt receipt = ReceiptMapper.INSTANCE.modelToEntity(receiptModel);
-        List<ReceiptItem> receiptItems = receiptItemRepository.findByReceipt(receipt);
-        receiptRepository.save(receipt);
-        for (ReceiptItem receiptItem : receiptItems) {
-            receiptItemRepository.save(receiptItem);
+        if (receiptModel.getId() != null) {
+            //poslat za update
+            receipt = ReceiptMapper.INSTANCE.modelToEntity(receiptModel);
+            for (ReceiptItem item : receiptItems) {
+                if (item.getReceipt() == null)
+                    item.setReceipt(receipt.getId());
+
+            }
+            receipt.setReceiptItems(receiptItems);
+
+        } else {
+            //poslat za insert
+            receipt = new Receipt();
+            receipt.setName(receiptModel.getName());
+            receipt = receiptRepository.save(receipt);
+
+
+            for (ReceiptItem item : receiptItems) {
+                item.setReceipt(receipt.getId());
+            }
+            receipt.setReceiptItems(receiptItems);
         }
 
+        receiptRepository.save(receipt);
         return ReceiptMapper.INSTANCE.entityToModel(receipt);
     }
 

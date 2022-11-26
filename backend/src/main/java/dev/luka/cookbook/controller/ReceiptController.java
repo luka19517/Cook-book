@@ -42,35 +42,18 @@ public class ReceiptController {
         }
     }
 
-    @PostMapping("/insert")
+    @PostMapping("/save")
     public ResponseEntity<String> insert(@RequestBody() String data) {
         ObjectMapper mapper = new ObjectMapper();
         ReceiptModel insertedReceipt;
         try {
-            insertedReceipt = service.insert(mapper.readValue(data, ReceiptModel.class));
+            insertedReceipt = service.save(mapper.readValue(data, ReceiptModel.class));
         } catch (JsonProcessingException e) {
             throw new IllegalStateException("Error while parsing request body");
         }
         try {
             String insertedReceiptJson = mapper.writeValueAsString(insertedReceipt);
             return new ResponseEntity<>(insertedReceiptJson, HttpStatus.OK);
-        } catch (JsonProcessingException e) {
-            throw new IllegalStateException("Error while converting to json");
-        }
-    }
-
-    @PostMapping("/update")
-    public ResponseEntity<String> update(@RequestBody() String data) {
-        ObjectMapper mapper = new ObjectMapper();
-        ReceiptModel updatedReceipt;
-        try {
-            updatedReceipt = service.update(mapper.readValue(data, ReceiptModel.class));
-        } catch (JsonProcessingException e) {
-            throw new IllegalStateException("Error while parsing request body");
-        }
-        try {
-            String updatedReceiptJson = mapper.writeValueAsString(updatedReceipt);
-            return new ResponseEntity<>(updatedReceiptJson, HttpStatus.OK);
         } catch (JsonProcessingException e) {
             throw new IllegalStateException("Error while converting to json");
         }

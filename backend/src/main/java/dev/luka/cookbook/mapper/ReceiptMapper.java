@@ -3,6 +3,7 @@ package dev.luka.cookbook.mapper;
 import dev.luka.cookbook.domain.entity.Receipt;
 import dev.luka.cookbook.model.ReceiptModel;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
 import java.util.List;

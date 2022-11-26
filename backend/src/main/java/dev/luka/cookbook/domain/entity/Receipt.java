@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "receipt")
@@ -19,6 +20,9 @@ public class Receipt implements Serializable {
 
     @Column(name = "name")
     private String name;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<ReceiptItem> receiptItems;
 
 
 }

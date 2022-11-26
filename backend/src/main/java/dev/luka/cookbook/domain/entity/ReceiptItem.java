@@ -22,8 +22,7 @@ public class ReceiptItem {
     @Column(name = "quantity")
     private Double quantity;
 
-    @ManyToOne
-    @JoinColumn(name = "receipt", referencedColumnName = "id")
-    private Receipt receipt;
+    @Column(name = "receipt")
+    private Long receipt;
 
 }

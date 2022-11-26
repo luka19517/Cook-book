@@ -10,9 +10,8 @@ public interface ReceiptService {
 
     List<ReceiptModel> getAll();
 
-    ReceiptModel insert(ReceiptModel receiptModel);
+    ReceiptModel save(ReceiptModel receiptModel);
 
-    ReceiptModel update(ReceiptModel receiptModel);
 
     void delete(ReceiptModel receiptModel);
 
