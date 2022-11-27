@@ -32,17 +32,10 @@ public class ReceiptServiceImpl implements ReceiptService {
     @Override
     public ReceiptModel save(ReceiptModel receiptModel) {
         Receipt receipt;
-        List<ReceiptItem> receiptItems = ReceiptItemMapper.INSTANCE.modelToEntity(receiptModel.getReceiptItems());
 
         if (receiptModel.getId() != null) {
             //poslat za update
             receipt = ReceiptMapper.INSTANCE.modelToEntity(receiptModel);
-            for (ReceiptItem item : receiptItems) {
-                if (item.getReceipt() == null)
-                    item.setReceipt(receipt.getId());
-
-            }
-            receipt.setReceiptItems(receiptItems);
 
         } else {
             //poslat za insert
@@ -50,12 +43,12 @@ public class ReceiptServiceImpl implements ReceiptService {
             receipt.setName(receiptModel.getName());
             receipt = receiptRepository.save(receipt);
 
-
-            for (ReceiptItem item : receiptItems) {
-                item.setReceipt(receipt.getId());
-            }
-            receipt.setReceiptItems(receiptItems);
         }
+        List<ReceiptItem> receiptItems = ReceiptItemMapper.INSTANCE.modelToEntity(receiptModel.getReceiptItems());
+        for (ReceiptItem item : receiptItems) {
+            item.setReceipt(receipt.getId());
+        }
+        receipt.setReceiptItems(receiptItems);
 
         receiptRepository.save(receipt);
         return ReceiptMapper.INSTANCE.entityToModel(receipt);
