@@ -1,9 +1,24 @@
 <template>
-    <PVButton label="HOME PAGE" class="p-button-secondary" />
+    <PVMenuBar :model="items"></PVMenuBar>
 </template>
 
 <script>
 
 export default({
+    data() {
+        return {
+            items: [
+                {
+                    label: 'Kreiraj novi recept',
+                    icon: 'pi pi-plus',
+                    to: '/receipt/create' 
+                },
+                {
+                    label: 'Pretrazi recepte',
+                    icon: 'pi pi-search'
+                }
+            ]
+        }
+    }
 });
 </script>
