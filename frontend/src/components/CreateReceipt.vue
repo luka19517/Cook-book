@@ -4,11 +4,11 @@
     <div class="card">
         <div class="field">
             <label for="name">Sastojak</label>
-            <PVInputText id="name" type="text" v-model="receiptItem.name" />
+            <PVInputText id="name" type="text" v-model="ingredient.name" />
         </div>
         <div class="field">
             <label for="quantity">Kolicina</label>
-            <PVInputText id="quantity" type="text" v-model="receiptItem.quantity" />
+            <PVInputText id="quantity" type="text" v-model="ingredient.quantity" />
         </div>
     </div>
 
@@ -25,15 +25,15 @@ export default ({
         return {
             receipt: {
                 name: '',
-                receiptItems: []
+                ingredients: []
             },
-            receiptItem: {}
+            ingredient: {}
         }
     },
     methods: {
         logReceiptItem(){
-            this.receipt.receiptItems.push(this.receiptItem);
-            console.log(this.receiptItem)
+            this.receipt.ingredients.push(this.ingredient);
+            console.log(this.ingredient)
         },
         logReceipt(){
             console.log(this.receipt)

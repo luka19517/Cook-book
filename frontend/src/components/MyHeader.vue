@@ -4,14 +4,19 @@
 
 <script>
 
-export default({
+export default ({
     data() {
         return {
             items: [
                 {
+                    label:'',
+                    icon: 'pi pi-home',
+                    to: '/'
+                },
+                {
                     label: 'Kreiraj novi recept',
                     icon: 'pi pi-plus',
-                    to: '/receipt/create' 
+                    to: '/receipt/create'
                 },
                 {
                     label: 'Pretrazi recepte',

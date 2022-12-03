@@ -1,5 +1,4 @@
 <template>
-    <h2> COOK BOOK</h2>
     <PVImage :src="logo" alt="logo"/>
 </template>
 
@@ -7,7 +6,11 @@
 
 export default {
     name: 'HomeComponent',
-    logo: require('../assets/logo.jpg')
+    data() {
+        return{
+            logo: require('../assets/logo.jpg')
+        }
+    }
 }
 </script>
 
