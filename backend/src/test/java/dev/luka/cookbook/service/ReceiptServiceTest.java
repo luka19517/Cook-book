@@ -48,7 +48,7 @@ public class ReceiptServiceTest {
         IngredientModel ingredient2 = new IngredientModel();
         ingredient2.setName("Voda");
         ingredient2.setQuantity(3.0);
-        ingredient1.setUnit("l");
+        ingredient2.setUnit("l");
 
         List<IngredientModel> ingredients = new ArrayList<>();
         ingredients.add(ingredient1);

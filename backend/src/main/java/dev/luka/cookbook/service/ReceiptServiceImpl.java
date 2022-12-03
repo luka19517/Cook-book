@@ -6,7 +6,6 @@ import dev.luka.cookbook.domain.repository.IngredientRepository;
 import dev.luka.cookbook.domain.repository.ReceiptRepository;
 import dev.luka.cookbook.mapper.IngredientMapper;
 import dev.luka.cookbook.mapper.ReceiptMapper;
-import dev.luka.cookbook.model.IngredientModel;
 import dev.luka.cookbook.model.ReceiptModel;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,17 +36,21 @@ public class ReceiptServiceImpl implements ReceiptService {
     @Override
     public ReceiptModel save(ReceiptModel receiptModel) {
         Receipt receipt = ReceiptMapper.INSTANCE.modelToEntity(receiptModel);
-        receipt = receiptRepository.save(receipt);
-        for (IngredientModel ingredient : receiptModel.getIngredients()) {
-            Ingredient ingredientEntity = IngredientMapper.INSTANCE.modelToEntity(ingredient);
-            ingredientEntity.setReceipt(receipt.getId());
-            ingredientRepository.save(ingredientEntity);
+        receiptRepository.save(receipt);
+        for (Ingredient ingredient : receipt.getIngredients()) {
+            ingredient.setReceipt(receipt.getId());
+            ingredientRepository.save(ingredient);
         }
         return ReceiptMapper.INSTANCE.entityToModel(receipt);
     }
 
     @Override
     public void delete(ReceiptModel receiptModel) {
+        List<Ingredient> ingredients = IngredientMapper.INSTANCE.modelToEntity(receiptModel.getIngredients());
+
+        for (Ingredient ingredient : ingredients) {
+            ingredientRepository.delete(ingredient);
+        }
         receiptRepository.delete(ReceiptMapper.INSTANCE.modelToEntity(receiptModel));
     }
 

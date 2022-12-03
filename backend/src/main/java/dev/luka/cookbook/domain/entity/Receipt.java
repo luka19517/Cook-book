@@ -26,7 +26,7 @@ public class Receipt implements Serializable {
     @JoinColumn(name = "type")
     private ReceiptType type;
 
-    @OneToMany(mappedBy = "receipt")
+    @OneToMany(mappedBy = "receipt", cascade = CascadeType.REMOVE)
     private List<Ingredient> ingredients = new ArrayList<>();
 
     @Column(name = "description")
