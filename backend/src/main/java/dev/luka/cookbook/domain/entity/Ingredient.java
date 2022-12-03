@@ -7,10 +7,10 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "receiptitem")
+@Table(name = "ingredient")
 @Getter
 @Setter
-public class ReceiptItem {
+public class Ingredient {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,6 +21,9 @@ public class ReceiptItem {
 
     @Column(name = "quantity")
     private Double quantity;
+
+    @Column(name = "unit")
+    private String unit;
 
     @Column(name = "receipt")
     private Long receipt;

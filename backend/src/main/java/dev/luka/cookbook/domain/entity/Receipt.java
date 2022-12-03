@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -21,8 +22,15 @@ public class Receipt implements Serializable {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<ReceiptItem> receiptItems;
+    @ManyToOne
+    @JoinColumn(name = "type")
+    private ReceiptType type;
+
+    @OneToMany(mappedBy = "receipt")
+    private List<Ingredient> ingredients = new ArrayList<>();
+
+    @Column(name = "description")
+    private String description;
 
 
 }
