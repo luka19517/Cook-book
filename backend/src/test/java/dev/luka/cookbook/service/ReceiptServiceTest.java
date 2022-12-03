@@ -130,7 +130,7 @@ public class ReceiptServiceTest {
         receipt2.setIngredients(receiptItemList.subList(0, 1));
         receipt2.setType(receiptType);
         receipt2.setDescription("description");
-        
+
         receipt2 = receiptService.save(receipt2);
 
         Assertions.assertEquals(2, receiptService.getAll().size());

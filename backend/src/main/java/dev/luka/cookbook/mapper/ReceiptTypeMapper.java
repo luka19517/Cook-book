@@ -5,6 +5,8 @@ import dev.luka.cookbook.model.ReceiptTypeModel;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
+import java.util.List;
+
 @Mapper
 public interface ReceiptTypeMapper {
     ReceiptTypeMapper INSTANCE = Mappers.getMapper(ReceiptTypeMapper.class);
@@ -12,4 +14,9 @@ public interface ReceiptTypeMapper {
     ReceiptTypeModel entityToModel(ReceiptType ingredient);
 
     ReceiptType modelToEntity(ReceiptTypeModel ingredientModel);
+
+    List<ReceiptType> modelToEntity(List<ReceiptTypeModel> ingredientModel);
+
+    List<ReceiptTypeModel> entityToModel(List<ReceiptType> ingredient);
+
 }
