@@ -9,7 +9,7 @@ export default ({
         return {
             items: [
                 {
-                    label:'',
+                    label: '',
                     icon: 'pi pi-home',
                     to: '/'
                 },
@@ -21,6 +21,16 @@ export default ({
                 {
                     label: 'Pretrazi recepte',
                     icon: 'pi pi-search'
+                },
+                {
+                    label: 'Konfiguracija',
+                    icon: 'pi pi-cog',
+                    items: [
+                        {
+                            label: 'Tipovi recepata',
+                            to: '/receipttype/all'
+                        }
+                    ]
                 }
             ]
         }

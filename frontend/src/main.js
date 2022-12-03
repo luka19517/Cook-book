@@ -11,7 +11,10 @@ import '/node_modules/primeflex/primeflex.css'
 import Button from 'primevue/button';
 import Menubar from 'primevue/menubar';
 import Image from 'primevue/image';
-import InputText  from 'primevue/inputtext';
+import InputText from 'primevue/inputtext';
+import Textarea from 'primevue/textarea';
+import OrderList from 'primevue/orderlist';
+import Dialog from 'primevue/dialog';
 
 import 'primeicons/primeicons.css';
 
@@ -24,7 +27,9 @@ app.component('PVButton', Button);
 app.component('PVMenuBar', Menubar);
 app.component('PVImage', Image);
 app.component('PVInputText', InputText);
-
+app.component('PVOrderList', OrderList);
+app.component('PVDialog', Dialog);
+app.component('PVTextarea', Textarea);
 
 app.component('myHeader', myHeader);
 

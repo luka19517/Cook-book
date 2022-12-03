@@ -2,40 +2,74 @@
     <h2>Kreiraj recept</h2>
 
     <div class="card">
-        <div class="field">
-            <label for="name">Sastojak</label>
-            <PVInputText id="name" type="text" v-model="ingredient.name" />
+        <div class="formgrid grid">
+            <div class="field col">
+                <div class="field">
+                    <label for="name">Ime recepta</label>
+                    <PVInputText id="name" v-model="receipt.name" />
+                </div>
+                <div class="field">
+                    <label for="description">Opis recepta</label>
+                    <PVTextarea id="description" v-model="receipt.description" />
+                </div>
+            </div>
+            <div class="field col">
+                <PVOrderList v-model="receipt.ingredients">
+                    <template #header>
+                        Lista sastojaka
+                    </template>
+                    <template #item="slotProps">
+                        <p>{{ slotProps.item.name }} - {{ slotProps.item.quantity }} - {{ slotProps.item.unit }}</p>
+                    </template>
+                </PVOrderList>
+                <PVButton icon="pi pi-plus" @click="this.newIngredient = {}; this.addIngredientDialogVisible = true;" />
+            </div>
         </div>
-        <div class="field">
-            <label for="quantity">Kolicina</label>
-            <PVInputText id="quantity" type="text" v-model="ingredient.quantity" />
-        </div>
+
+        <PVButton icon="pi pi-save" @click="saveReceipt" />
+
     </div>
 
-    <PVButton @click="logReceiptItem" label="Sacuvaj sastojak"></PVButton>
-    <PVButton @click="logReceipt" label="Sacuvaj recept"></PVButton>
+    <PVDialog header="Dodaj sastojak" v-model:visible="addIngredientDialogVisible">
+        <PVInputText v-model="newIngredient.name"></PVInputText>
+        <PVInputText v-model="newIngredient.quantity"></PVInputText>
+        <PVInputText v-model="newIngredient.unit"></PVInputText>
+        <template #footer>
+            <PVButton @click="receipt.ingredients.push(newIngredient); addIngredientDialogVisible = false"></PVButton>
+        </template>
+    </PVDialog>
 
 </template>
 
 
 <script>
+import axios from 'axios';
 
 export default ({
     data() {
         return {
-            receipt: {
-                name: '',
-                ingredients: []
-            },
-            ingredient: {}
+            receipt: { id:null, name: '', type: { id: 'dezert', name: 'Dezert' }, ingredients: [], description: '' },
+            addIngredientDialogVisible: false,
+            newIngredient: {}
         }
     },
     methods: {
-        logReceiptItem(){
-            this.receipt.ingredients.push(this.ingredient);
-            console.log(this.ingredient)
+        logReceipt() {
+            console.log(this.receipt)
         },
-        logReceipt(){
+        async saveReceipt() {
+            const response = await axios({
+                method: 'post',
+                url: 'http://localhost:8090/receiptService/save',
+                data: {
+                    id: this.receipt.id,
+                    name: this.receipt.name,
+                    type: this.receipt.type,
+                    ingredients: this.receipt.ingredients,
+                    description: this.receipt.description
+                }
+            });
+            this.receipt = response.data;
             console.log(this.receipt)
         }
     }
