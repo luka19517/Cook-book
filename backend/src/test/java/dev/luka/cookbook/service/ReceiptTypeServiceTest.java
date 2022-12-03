@@ -10,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Configurable
 @ContextConfiguration(classes = {TestConfig.class})
@@ -23,26 +24,27 @@ public class ReceiptTypeServiceTest {
 
     @Test
     public void testInsertUpdateDelete() {
-        Assertions.assertEquals(0, receiptTypeService.getAll().size());
+        int initialSize = receiptTypeService.getAll().size();
 
         ReceiptTypeModel receiptTypeModel1 = new ReceiptTypeModel();
-        receiptTypeModel1.setId("dezert");
-        receiptTypeModel1.setName("Dezert");
+        receiptTypeModel1.setId("kuvano");
+        receiptTypeModel1.setName("Kuvano");
 
         receiptTypeModel1 = receiptTypeService.save(receiptTypeModel1);
-        Assertions.assertEquals("dezert", receiptTypeModel1.getId());
-        Assertions.assertEquals(1, receiptTypeService.getAll().size());
+        Assertions.assertEquals("kuvano", receiptTypeModel1.getId());
+        Assertions.assertEquals(initialSize + 1, receiptTypeService.getAll().size());
 
-        ReceiptTypeModel receiptTypeModel2 = receiptTypeService.getForId("dezert");
-        receiptTypeModel2.setName("Dezert2");
+        List<ReceiptTypeModel> types = receiptTypeService.getAll();
+        ReceiptTypeModel receiptTypeModel2 = receiptTypeService.getForId("kuvano");
+        receiptTypeModel2.setName("Kuvano2");
         receiptTypeService.save(receiptTypeModel2);
 
-        receiptTypeModel2 = receiptTypeService.getForId("dezert");
-        Assertions.assertEquals("Dezert2", receiptTypeModel2.getName());
+        receiptTypeModel2 = receiptTypeService.getForId("kuvano");
+        Assertions.assertEquals("Kuvano2", receiptTypeModel2.getName());
 
         receiptTypeService.delete(receiptTypeModel2);
 
-        Assertions.assertEquals(0, receiptTypeService.getAll().size());
+        Assertions.assertEquals(initialSize, receiptTypeService.getAll().size());
 
     }
 
