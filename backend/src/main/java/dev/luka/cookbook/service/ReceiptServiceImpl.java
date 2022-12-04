@@ -45,6 +45,11 @@ public class ReceiptServiceImpl implements ReceiptService {
     }
 
     @Override
+    public List<ReceiptModel> completeReceipt(String query) {
+        return ReceiptMapper.INSTANCE.entityToModel(receiptRepository.completeReceipt(query));
+    }
+
+    @Override
     public void delete(ReceiptModel receiptModel) {
         List<Ingredient> ingredients = IngredientMapper.INSTANCE.modelToEntity(receiptModel.getIngredients());
 

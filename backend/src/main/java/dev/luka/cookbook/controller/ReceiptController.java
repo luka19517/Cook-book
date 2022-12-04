@@ -3,6 +3,8 @@ package dev.luka.cookbook.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.luka.cookbook.model.ReceiptModel;
+import dev.luka.cookbook.model.ReceiptTypeModel;
+import dev.luka.cookbook.requests.CompleteRequestModel;
 import dev.luka.cookbook.service.ReceiptService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -71,5 +73,23 @@ public class ReceiptController {
             throw new IllegalStateException("Error while parsing request body");
         }
     }
+    @PostMapping("/completeReceipt")
+    public ResponseEntity<String> completeReceipt(@RequestBody() String query) {
+        ObjectMapper mapper = new ObjectMapper();
+        CompleteRequestModel completeQuery;
+        try {
+            completeQuery = mapper.readValue(query, CompleteRequestModel.class);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+        List<ReceiptModel> receiptTypeList = service.completeReceipt(completeQuery.getQuery());
+        try {
+            String receiptListJson = mapper.writeValueAsString(receiptTypeList);
+            return new ResponseEntity<>(receiptListJson, HttpStatus.OK);
+        } catch (JsonProcessingException e) {
+            throw new IllegalStateException("Error while converting to json");
+        }
+    }
+
 
 }

@@ -33,6 +33,11 @@ public class ReceiptTypeServiceImpl implements ReceiptTypeService {
     }
 
     @Override
+    public List<ReceiptTypeModel> completeReceiptType(String query) {
+        return ReceiptTypeMapper.INSTANCE.entityToModel(receiptTypeRepository.completeReceiptType(query));
+    }
+
+    @Override
     public void delete(ReceiptTypeModel receiptTypeModel) {
         receiptTypeRepository.delete(ReceiptTypeMapper.INSTANCE.modelToEntity(receiptTypeModel));
     }

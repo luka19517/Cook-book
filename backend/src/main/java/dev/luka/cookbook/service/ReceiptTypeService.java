@@ -12,6 +12,7 @@ public interface ReceiptTypeService {
 
     ReceiptTypeModel save(ReceiptTypeModel receiptTypeModel);
 
+    List<ReceiptTypeModel> completeReceiptType(String query);
 
     void delete(ReceiptTypeModel receiptTypeModel);
 }
