@@ -15,6 +15,7 @@ import InputText from 'primevue/inputtext';
 import Textarea from 'primevue/textarea';
 import OrderList from 'primevue/orderlist';
 import Dialog from 'primevue/dialog';
+import AutoComplete from 'primevue/autocomplete';
 
 import 'primeicons/primeicons.css';
 
@@ -30,6 +31,7 @@ app.component('PVInputText', InputText);
 app.component('PVOrderList', OrderList);
 app.component('PVDialog', Dialog);
 app.component('PVTextarea', Textarea);
+app.component('PVAutoComplete', AutoComplete)
 
 app.component('myHeader', myHeader);
 

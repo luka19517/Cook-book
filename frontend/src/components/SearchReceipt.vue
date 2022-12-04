@@ -1,7 +1,10 @@
 <template>
-    <h2>Kreiraj recept</h2>
 
-    <div class="card">
+    <label for="receipt">Pretrazi recepte</label>
+    <PVAutoComplete id="receipt" v-model="receipt" @complete="calculateFilteredReceipts($event)"
+        :suggestions="filteredReceipts" :dropdown="true" optionLabel="name" forceSelection />
+
+    <div v-if="receipt">
         <div class="formgrid grid">
             <div class="field col">
                 <div class="field">
@@ -23,7 +26,6 @@
                         <p>{{ slotProps.item.name }} - {{ slotProps.item.quantity }} - {{ slotProps.item.unit }}</p>
                     </template>
                 </PVOrderList>
-                <PVButton icon="pi pi-plus" @click="this.newIngredient = {}; this.addIngredientDialogVisible = true;" />
             </div>
             <div class="field col">
 
@@ -34,66 +36,38 @@
             <label for="description">Opis recepta</label>
             <PVTextarea id="description" v-model="receipt.description" />
         </div>
-
-        <PVButton icon="pi pi-save" @click="saveReceipt" />
-
     </div>
 
-    <PVDialog header="Dodaj sastojak" v-model:visible="addIngredientDialogVisible">
-        <PVInputText v-model="newIngredient.name"></PVInputText>
-        <PVInputText v-model="newIngredient.quantity"></PVInputText>
-        <PVInputText v-model="newIngredient.unit"></PVInputText>
-        <template #footer>
-            <PVButton @click="receipt.ingredients.push(newIngredient); addIngredientDialogVisible = false"></PVButton>
-        </template>
-    </PVDialog>
 
 </template>
-
 
 <script>
 import axios from 'axios';
 
 export default ({
+    name: 'SearchReceiptComponent',
     data() {
         return {
-            receipt: {ingredients:[]},
-            addIngredientDialogVisible: false,
-            newIngredient: {},
-            filteredTypes: []
+            receipt: null,
+            filteredReceipts: []
         }
     },
     methods: {
-        logReceipt() {
-            console.log(this.receipt)
-        },
-        async saveReceipt() {
-            const response = await axios({
-                method: 'post',
-                url: 'http://localhost:8090/receiptService/save',
-                data: {
-                    id: this.receipt.id,
-                    name: this.receipt.name,
-                    type: this.receipt.type,
-                    ingredients: this.receipt.ingredients,
-                    description: this.receipt.description
-                }
-            });
-            this.receipt = response.data;
-            console.log(this.receipt)
-        },
-        async calculateFilteredTypes(event) {
+        async calculateFilteredReceipts(event) {
             console.log(event.query)
             const response = await axios({
                 method: 'post',
-                url: 'http://localhost:8090/receiptTypeService/completeReceiptType',
+                url: 'http://localhost:8090/receiptService/completeReceipt',
                 data: {
                     query: event.query
                 }
             });
-            this.filteredTypes = response.data;
+            this.filteredReceipts = response.data;
         }
     }
-});
+
+
+})
+
 
 </script>

@@ -20,7 +20,8 @@ export default ({
                 },
                 {
                     label: 'Pretrazi recepte',
-                    icon: 'pi pi-search'
+                    icon: 'pi pi-search',
+                    to: '/receipt/find'
                 },
                 {
                     label: 'Konfiguracija',
