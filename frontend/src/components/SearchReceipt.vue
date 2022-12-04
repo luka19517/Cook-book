@@ -13,8 +13,7 @@
                 </div>
                 <div class="field">
                     <label for="type">Tip recepta</label>
-                    <PVAutoComplete id="type" v-model="receipt.type" @complete="calculateFilteredTypes($event)"
-                        :suggestions="filteredTypes" :dropdown="true" optionLabel="name" forceSelection />
+                    <PVInputText id="type" v-model="receipt.type.name" />
                 </div>
             </div>
             <div class="field col">
@@ -71,3 +70,13 @@ export default ({
 
 
 </script>
+
+<style>
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+</style>

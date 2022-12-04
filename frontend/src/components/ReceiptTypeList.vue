@@ -2,9 +2,9 @@
     <PVOrderList v-model="types">
         <template #header>
             Lista tipova recepata
-        </template >
+        </template>
         <template #item="slotProps">
-            <p>{{slotProps.item.name}}</p>
+            <p>{{ slotProps.item.name }}</p>
         </template>
     </PVOrderList>
 
@@ -18,7 +18,8 @@ export default {
     name: 'ReceiptTypeListComponent',
     data() {
         return {
-            types: []
+            types: [],
+            type: {}
         }
     },
     methods: {

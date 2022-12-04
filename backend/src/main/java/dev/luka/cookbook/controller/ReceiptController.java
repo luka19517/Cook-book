@@ -3,7 +3,6 @@ package dev.luka.cookbook.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.luka.cookbook.model.ReceiptModel;
-import dev.luka.cookbook.model.ReceiptTypeModel;
 import dev.luka.cookbook.requests.CompleteRequestModel;
 import dev.luka.cookbook.service.ReceiptService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://192.168.1.134:3000")
+@CrossOrigin(origins = {"http://192.168.1.134:3000", "http://localhost:3000"})
 @RestController
 @RequestMapping("/receiptService")
 public class ReceiptController {
@@ -73,6 +72,7 @@ public class ReceiptController {
             throw new IllegalStateException("Error while parsing request body");
         }
     }
+
     @PostMapping("/completeReceipt")
     public ResponseEntity<String> completeReceipt(@RequestBody() String query) {
         ObjectMapper mapper = new ObjectMapper();

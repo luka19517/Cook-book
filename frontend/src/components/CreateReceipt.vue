@@ -1,52 +1,60 @@
 <template>
     <h2>Kreiraj recept</h2>
 
-    <div class="card">
-        <div class="formgrid grid">
-            <div class="field col">
-                <div class="field">
-                    <label for="name">Ime recepta</label>
-                    <PVInputText id="name" v-model="receipt.name" />
+    <div class="center">
+        <div class="card">
+            <div class="formgrid grid">
+                <div class="field col">
+                    <div class="field">
+                        <label for="name">Ime recepta</label>
+                        <PVInputText id="name" v-model="receipt.name" />
+                    </div>
+                    <div class="field">
+                        <label for="type">Tip recepta</label>
+                        <PVAutoComplete id="type" v-model="receipt.type" @complete="calculateFilteredTypes($event)"
+                            :suggestions="filteredTypes" :dropdown="true" optionLabel="name" forceSelection />
+                    </div>
                 </div>
-                <div class="field">
-                    <label for="type">Tip recepta</label>
-                    <PVAutoComplete id="type" v-model="receipt.type" @complete="calculateFilteredTypes($event)"
-                        :suggestions="filteredTypes" :dropdown="true" optionLabel="name" forceSelection />
+                <div class="flex field col">
+                    <PVOrderList v-model="receipt.ingredients">
+                        <template #header>
+                            <p>Lista sastojaka</p>
+                            <PVButton class="center" icon="pi pi-plus"
+                                @click="this.newIngredient = {}; this.addIngredientDialogVisible = true;" />
+                        </template>
+                        <template #item="slotProps">
+                            <p>{{ slotProps.item.name }} - {{ slotProps.item.quantity }} - {{ slotProps.item.unit }}</p>
+                        </template>
+                    </PVOrderList>
                 </div>
-            </div>
-            <div class="field col">
-                <PVOrderList v-model="receipt.ingredients">
-                    <template #header>
-                        Lista sastojaka
-                    </template>
-                    <template #item="slotProps">
-                        <p>{{ slotProps.item.name }} - {{ slotProps.item.quantity }} - {{ slotProps.item.unit }}</p>
-                    </template>
-                </PVOrderList>
-                <PVButton icon="pi pi-plus" @click="this.newIngredient = {}; this.addIngredientDialogVisible = true;" />
-            </div>
-            <div class="field col">
+                <div class="field col">
+
+                </div>
 
             </div>
+            <div class="flex field">
+                <label for="description">Opis recepta</label>
+                <PVTextarea  id="description" v-model="receipt.description" cols="66" rows="10" />
+            </div>
+
+            <PVButton icon="pi pi-save" @click="saveReceipt" label="Sačuvaj recept" />
+
 
         </div>
-        <div class="field">
-            <label for="description">Opis recepta</label>
-            <PVTextarea id="description" v-model="receipt.description" />
-        </div>
 
-        <PVButton icon="pi pi-save" @click="saveReceipt" />
+
+        <PVDialog header="Dodaj sastojak" v-model:visible="addIngredientDialogVisible">
+            <PVInputText v-model="newIngredient.name"></PVInputText>
+            <PVInputText v-model="newIngredient.quantity"></PVInputText>
+            <PVInputText v-model="newIngredient.unit"></PVInputText>
+            <template #footer>
+                <PVButton @click="receipt.ingredients.push(newIngredient); addIngredientDialogVisible = false">
+                </PVButton>
+            </template>
+        </PVDialog>
 
     </div>
 
-    <PVDialog header="Dodaj sastojak" v-model:visible="addIngredientDialogVisible">
-        <PVInputText v-model="newIngredient.name"></PVInputText>
-        <PVInputText v-model="newIngredient.quantity"></PVInputText>
-        <PVInputText v-model="newIngredient.unit"></PVInputText>
-        <template #footer>
-            <PVButton @click="receipt.ingredients.push(newIngredient); addIngredientDialogVisible = false"></PVButton>
-        </template>
-    </PVDialog>
 
 </template>
 
@@ -57,7 +65,7 @@ import axios from 'axios';
 export default ({
     data() {
         return {
-            receipt: {ingredients:[]},
+            receipt: { ingredients: [] },
             addIngredientDialogVisible: false,
             newIngredient: {},
             filteredTypes: []
@@ -97,3 +105,12 @@ export default ({
 });
 
 </script>
+
+<style>
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+</style>
