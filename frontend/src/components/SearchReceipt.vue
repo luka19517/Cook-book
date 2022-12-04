@@ -57,7 +57,7 @@ export default ({
             console.log(event.query)
             const response = await axios({
                 method: 'post',
-                url: 'http://localhost:8090/receiptService/completeReceipt',
+                url: 'http://192.168.1.134:8090/receiptService/completeReceipt',
                 data: {
                     query: event.query
                 }
