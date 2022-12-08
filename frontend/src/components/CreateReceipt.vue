@@ -1,7 +1,7 @@
 <template>
-    <h2>Kreiraj recept</h2>
 
-    <div class="center">
+    <div class="page-background">
+        <h2>Kreiraj recept</h2>
         <div class="card">
             <div class="formgrid grid">
                 <div class="field col">
@@ -34,7 +34,7 @@
             </div>
             <div class="flex field">
                 <label for="description">Opis recepta</label>
-                <PVTextarea  id="description" v-model="receipt.description" cols="66" rows="10" />
+                <PVTextarea id="description" v-model="receipt.description" cols="66" rows="10" />
             </div>
 
             <PVButton icon="pi pi-save" @click="saveReceipt" label="Sačuvaj recept" />
@@ -107,10 +107,5 @@ export default ({
 </script>
 
 <style>
-.center {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 50%;
-}
+@import '../assets/css/other_pages_style.css';
 </style>

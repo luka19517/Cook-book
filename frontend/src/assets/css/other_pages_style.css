@@ -1,0 +1,23 @@
+* {
+    margin: 0;
+    padding: 0;
+    /*  borders and paddings are not added */
+    box-sizing: border-box;
+}
+
+.page-background {
+    /* 95 % of the viewport height */
+    height: 95vh;
+    background-image: linear-gradient(to right bottom, #0000008f, #41414180),url(../img/background.png);
+    /* fit element inside of the box  */
+    background-size: cover;
+
+    /* fiksira vrh viewport*/
+    background-position: top;
+    position: relative;
+    color: #DAA520;
+
+    clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%)
+}
+
+

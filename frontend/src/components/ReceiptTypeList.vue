@@ -1,12 +1,14 @@
 <template>
-    <PVOrderList v-model="types">
-        <template #header>
-            Lista tipova recepata
-        </template>
-        <template #item="slotProps">
-            <p>{{ slotProps.item.name }}</p>
-        </template>
-    </PVOrderList>
+    <div class="page-background">
+        <PVOrderList v-model="types">
+            <template #header>
+                Lista tipova recepata
+            </template>
+            <template #item="slotProps">
+                <p>{{ slotProps.item.name }}</p>
+            </template>
+        </PVOrderList>
+    </div>
 
 
 </template>
@@ -42,3 +44,9 @@ export default {
 
 
 </script>
+
+<style>
+
+@import '../assets/css/other_pages_style.css';
+
+</style>
