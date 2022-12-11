@@ -1,9 +1,9 @@
 <template>
     <div class="page-background">
+        <div class="page-header">
+            <h2 class="header-text"> Lista tipova recepata</h2>
+        </div>
         <PVOrderList v-model="types">
-            <template #header>
-                Lista tipova recepata
-            </template>
             <template #item="slotProps">
                 <p>{{ slotProps.item.name }}</p>
             </template>
@@ -28,7 +28,7 @@ export default {
         async loadTypes() {
             const response = await axios({
                 method: 'get',
-                url: 'http://192.168.1.134:8090/receiptTypeService/getAll'
+                url: 'http://192.168.1.104:8090/receiptTypeService/getAll'
             });
             this.types = response.data;
             console.log(this.types)

@@ -8,16 +8,278 @@
 .page-background {
     /* 95 % of the viewport height */
     height: 95vh;
-    background-image: linear-gradient(to right bottom, #0000008f, #41414180),url(../img/background.png);
+    background-image: linear-gradient(to right bottom, #0000008f, #41414180), url(../img/background.png);
     /* fit element inside of the box  */
     background-size: cover;
-
+    font-style: italic;
+    font-family: "Didot", serif;
     /* fiksira vrh viewport*/
     background-position: top;
     position: relative;
     color: #DAA520;
+}
 
-    clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%)
+.logo-box {
+    position: absolute;
+    top: 2.5%;
+    left: 2.5%;
+
+}
+
+.logo {
+    height: 80px;
+
+}
+
+.page-header {
+    position: relative;
+    height: 15vh;
+
+    animation-name: moveInLeft;
+    animation-duration: 1s;
+}
+
+.header-text {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    display: block;
+    transform: translate(-50%, -50%);
+    text-transform: uppercase;
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: 12.4px;
+}
+
+.create-form {
+    position: relative;
+    height: 85vh;
+    animation-name: moveInLeft;
+    animation-duration: 1s;
+}
+
+.input-field {
+    position: absolute;
+    width: 20%;
+    height: 5%;
+    background-color: rgba(47, 46, 46, 0.9);
+    border: none;
+    color: white;
+    font-size: 20px;
+    font-weight: 150;
+    border-radius: 5%;
+}
+
+.p-autocomplete {
+    position: absolute;
+    top: 25%;
+    left: 20%;
+    height: 5%;
+    width: 24%;
+    border: none;
+    background-color: rgba(111, 107, 107, 0.9);
+    background-size: cover;
+    color: white;
 }
 
 
+label {
+    position: absolute;
+    font-size: 25px;
+    font-weight: 200;
+    color: #DAA520;
+    animation-name: moveInLeft;
+    animation-duration: 1s;
+}
+
+.textarea-field {
+    position: absolute;
+    width: 70%;
+    height: 20%;
+    background-color: rgba(47, 46, 46, 0.9);
+    border: none;
+    overflow-y: scroll;
+    color: white;
+    font-size: 20px;
+    font-weight: 150;
+    font-family: "Didot", serif;
+    overflow: auto;
+    animation-name: moveInLeft;
+    animation-duration: 1s;
+
+}
+
+.list-box {
+    position: absolute;
+    background-color: transparent;
+    left: 50%;
+    top: 0%;
+    width: 40%;
+    height: 35%;
+    background-size: cover;
+}
+
+
+.list-header {
+    position: absolute;
+    left: 50%;
+    top: 0%;
+    height: 10%;
+    transform: translate(-50%);
+    background-color: transparent;
+}
+
+.list-header-text {
+    color: #DAA520;
+    font-size: 25px;
+    font-weight: 200;
+}
+
+.add-ingredient-button {
+    position: absolute;
+    top: 95%;
+    left: 50%;
+    height: 15%;
+    width: 40%;
+    transform: translate(-50%, -50%);
+    background-color: rgb(95, 99, 95);
+    border-radius: 20%;
+    color: white;
+    font-size: 15px;
+    font-style: italic;
+    font-family: "Didot", serif;
+    font-weight: 300;
+    box-shadow: 3px 4px #2f2e2e;
+}
+
+.list-items-box {
+    position: absolute;
+    top: 20%;
+    width: 100%;
+    height: 70%;
+    background-color: rgba(47, 46, 46, 0.9);
+    color: white;
+    border: none;
+    overflow-y: scroll;
+    overflow: auto
+}
+
+.ingredient-list-item {
+    position: relative;
+    top: 5%;
+    left: 10%;
+    list-style-type: none;
+    color: white;
+    font-size: 20px;
+    font-weight: 150;
+}
+
+.save-button {
+    position: absolute;
+    bottom: 15%;
+    left: 50%;
+    width: 15%;
+    height: 10%;
+    transform: translate(-50%);
+    background-color: rgb(95, 99, 95);
+    border-radius: 20%;
+    font-family: "Didot", serif;
+    font-size: 20px;
+    color: white;
+    font-style: italic;
+    box-shadow: 3px 4px #2f2e2e;
+}
+
+.save-button:hover {
+    background-color: #4CAF50;
+    /* Green */
+}
+
+.add-ingredient-button:hover {
+    background-color: #4CAF50;
+}
+
+.search-box {
+    position: relative;
+    height: 20vh;
+    animation-name: moveInLeft;
+    animation-duration: 1s;
+}
+
+
+.search-field {
+    position: absolute;
+    left: 20%;
+    top: 15%;
+}
+
+.receipt-form {
+    position: relative;
+    height: 85vh;
+    animation-name: moveInLeft;
+    animation-duration: 1s;
+}
+
+.p-dialog-titlebar {
+    position: relative;
+    background-color: rgba(47, 46, 46, 0.9);
+    background-size: cover;
+
+}
+
+.p-dialog {
+    position: absolute;
+    background-color: rgba(108, 107, 107, 0.95);
+    height: 80%;
+    width: 60%;
+}
+
+
+.add-ingredient-button-container {
+    position: absolute;
+    left: 50%;
+    top: 40%;
+    height: 40%;
+    width: 50%
+}
+
+.submit-ingredient-button {
+    position: absolute;
+    bottom: 50%;
+    left: 60%;
+    width: 20%;
+    height: 40%;
+    transform: translate(-50%);
+    background-color: rgb(95, 99, 95);
+    border-radius: 20%;
+    font-family: "Didot", serif;
+    font-size: 20px;
+    color: white;
+    font-style: italic;
+    box-shadow: 3px 4px #2f2e2e;
+
+}
+
+.submit-ingredient-button:hover {
+    background-color: #4CAF50;
+    /* Green */
+
+}
+
+@keyframes moveInLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-100px);
+    }
+
+
+    80% {
+        transform: translateX(10px);
+    }
+
+
+    100% {
+        opacity: 1;
+        transform: translate(0);
+    }
+}

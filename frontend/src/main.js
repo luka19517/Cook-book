@@ -17,6 +17,7 @@ import OrderList from 'primevue/orderlist';
 import Dialog from 'primevue/dialog';
 import AutoComplete from 'primevue/autocomplete';
 import Listbox from 'primevue/listbox';
+import ToastService from 'primevue/toastservice';
 
 import 'primeicons/primeicons.css';
 
@@ -24,6 +25,7 @@ const app = createApp(App);
 
 app.use(router);
 app.use(PrimeVue);
+app.use(ToastService);
 
 app.component('PVButton', Button);
 app.component('PVMenuBar', Menubar);
