@@ -5,10 +5,13 @@ Spring boot + VueJS project - demo
 	npm run serve
 
 Docker commands:
-Frontend:
+
+Frontend
 
 Create image:
+
 	docker image build -t cookbook:latest .
 
 Run container:
+
 	docker container run -d --name coookbook -p 3000:3000 cookbook:latest
