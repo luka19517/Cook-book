@@ -6,7 +6,7 @@ Spring boot + VueJS project - demo
 
 ## Docker commands:
 
-Frontend
+### Frontend
 
 Create image:
 
