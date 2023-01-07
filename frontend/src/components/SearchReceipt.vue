@@ -107,7 +107,7 @@ export default ({
             this.selectionMade = false;
             const response = await axios({
                 method: 'post',
-                url: 'http://192.168.1.104:8090/receiptService/completeReceipt',
+                url: 'http://localhost:8090/receiptService/completeReceipt',
                 data: {
                     query: event.query
                 }

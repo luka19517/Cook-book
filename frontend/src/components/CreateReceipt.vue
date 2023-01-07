@@ -140,7 +140,7 @@ export default ({
         async saveReceipt() {
             const response = await axios({
                 method: 'post',
-                url: 'http://192.168.1.104:8090/receiptService/save',
+                url: 'http://localhost:8090/receiptService/save',
                 data: {
                     id: this.receipt.id,
                     name: this.receipt.name,
@@ -157,7 +157,7 @@ export default ({
             console.log(event.query)
             const response = await axios({
                 method: 'post',
-                url: 'http://192.168.1.104:8090/receiptTypeService/completeReceiptType',
+                url: 'http://localhost:8090/receiptTypeService/completeReceiptType',
                 data: {
                     query: event.query
                 }

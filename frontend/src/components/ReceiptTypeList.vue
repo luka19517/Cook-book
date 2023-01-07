@@ -28,7 +28,7 @@ export default {
         async loadTypes() {
             const response = await axios({
                 method: 'get',
-                url: 'http://192.168.1.104:8090/receiptTypeService/getAll'
+                url: 'http://localhost:8090/receiptTypeService/getAll'
             });
             this.types = response.data;
             console.log(this.types)

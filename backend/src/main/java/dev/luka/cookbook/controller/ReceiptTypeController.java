@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = {"http://192.168.1.134:3000","http://192.168.1.104:3000","http://localhost:3000","http://192.168.1.7:3000"})
+@CrossOrigin(origins = {"http://localhost:3000/"})
 @RestController
 @RequestMapping("/receiptTypeService")
 public class ReceiptTypeController {
